@@ -1,7 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const dbConnection = require("./dbConnection");
-const router = require("./router/placeRouter");
+const placeRouter = require("./router/placeRouter");
+const userRouter = require("./router/User");
 
 // Load environment variables
 dotenv.config();
@@ -26,7 +27,8 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-app.use("/place", router);
+app.use("/place", placeRouter);
+app.use("/auth", userRouter);
 
 // Start the server
 app.listen(PORT, (err) => {
