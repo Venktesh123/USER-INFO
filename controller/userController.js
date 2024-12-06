@@ -1,7 +1,9 @@
 const User = require("../models/User");
 
 module.exports.createUser = async (req, res, next) => {
-  const { name, email, password, image, places } = req.body;
+  console.log("Kaa");
+  const { name, email, password, image } = req.body;
+  console.log("Kaa");
 
   // Validate required fields
   if (!name || !email || !password) {
@@ -30,7 +32,7 @@ module.exports.createUser = async (req, res, next) => {
     email,
     password, // Consider hashing the password using bcrypt
     image: image || null,
-    places: places || [],
+    places: [],
   });
 
   try {
@@ -60,9 +62,11 @@ module.exports.login = async (req, res, next) => {
       message: "Logging in failed, please try again later.",
     });
   }
-  if (!existingUser && existingUser.password != password) {
-    const error = new HttpError("invalid Credential", 401);
-    return next(error);
+  if (!existingUser) {
+    return res.json({ message: "User does not exist please signup" });
+  }
+  if (existingUser.password !== password) {
+    return res.json({ message: "Invalid Credential" });
   }
   res.json({ message: "Log In" });
 };

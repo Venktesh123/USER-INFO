@@ -30,6 +30,12 @@ const placeSchema = new Schema({
       required: true,
     },
   },
+
+  creator: {
+    type: mongoose.Types.ObjectId,
+    required: true,
+    ref: "User",
+  },
 });
 
 // Export the Place model
