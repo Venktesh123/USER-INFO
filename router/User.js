@@ -1,9 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { createUser, login } = require("../controller/userController");
+const controller = require("../controller/userController");
 
-// Change GET to POST for creating a place
-router.post("/create-user", createUser);
-router.post("/logIn", login);
+// Log for debugging purposes
+console.log("User Router Initialized");
+
+// Define user-related routes
+router.post("/signup", controller.createUser);
+router.post("/login", controller.login);
 
 module.exports = router;
