@@ -12,6 +12,15 @@ const PORT = process.env.PORT || 3000; // Fallback to 3000 if PORT is not set
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Orign,X-Requested-With,Content-Type,Acceept,Authorizarion"
+  );
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE");
+  next();
+});
 
 // Database connection
 dbConnection()
